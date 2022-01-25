@@ -59,7 +59,9 @@ The input json includes the following fields.
 
 This repository is created to support the download and regriding CMIP6 data for research purposes. Any usage beyond the intended purpose are the responsibility of the users.
 
-The developer does not bear any responsibility for the data quality and correctness. All users should also cite the original data accordingly, and acknowledge the usage of this tool for usage as:
+The developer does not bear any responsibility for the data quality and correctness. All users should also cite the original data accordingly, and acknowledge the usage of this tool for usage as using:
+
+Koirala, Sujan, Python scripts to access CMIP6 data from Pangeo Gallery, Version 1.0, https://zenodo.org/record/5900393
 
 
 
