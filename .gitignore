@@ -1,0 +1,16 @@
+# Ignore everything in repository root 
+/*
+
+# Files to not ignore
+!/get_cmip6.py
+!/input.json
+!/README.md
+!/environment.yml
+!/.gitignore
+
+*~
+*.swpi
+*.swo
+*.bak
+*.txt
+*.asv
