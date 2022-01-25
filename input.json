@@ -1,0 +1,31 @@
+{
+    "metadata_csv": "",
+    "out_dir": "./cmip6_202102",
+    "experiments": {
+        "historical": [
+            1980,
+            2010
+        ],
+        "ssp585": [
+            2070,
+            2100
+        ]
+    },
+    "variables": {
+        "tas": "Amon",
+        "hfls": "Amon",
+        "lai": "Lmon",
+        "mrso": "Lmon"
+    },
+    "target_grid": [0.5, 0.5],
+    "regrid_method": "nearest_s2d",
+    "download_all": true,
+    "dataset": {
+        "ipsl": {
+            "source_id": "IPSL-CM6A-LR",
+            "ens_members": [
+                "r1i1p1f1"
+            ]
+        }
+    }
+}
