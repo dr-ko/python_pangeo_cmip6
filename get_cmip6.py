@@ -28,16 +28,22 @@ out_dir = input['out_dir']
 os.makedirs(out_dir, exist_ok=True)
 data_set=input['dataset']
 
-# check if the download all option is invoked. If True, all unique models and ensemble members are obtained from metadata
-if input['download_all']:
+# check if the download all models option is invoked. If True, all unique models and ensemble members are obtained from metadata
+if input['download_all_models']:
     models = meta_data['source_id'].unique()
-    ens_members = meta_data['member_id'].unique()
-    print (models, ens_members)
-    full_ensemble = True
+    all_models = True
 else:
     models = data_set.keys()
+    all_models = False
+
+# check if the download all ensemble members option is invoked. If True, all unique models and ensemble members are obtained from metadata
+if input['download_all_members']:
+    ens_members = meta_data['member_id'].unique()
+    full_ensemble = True
+else:
     ens_members = None
     full_ensemble = False
+
 
 # check if regrid option is activated and create a lat lon array for target spatial grids
 if len(input['target_grid']) == 2:
@@ -61,12 +67,15 @@ for experiment, info in input['experiments'].items():
     end_year = info[1]
     # loop through the unique models
     for model in models:
-        # get ensemble members if download_all is False
-        if not full_ensemble:
-            ens_members = data_set[model]['ens_members']
+        # get models if download_all_models/all_models is False
+        if not all_models:
             src = data_set[model]['source_id']
         else:
             src = model
+
+        # get ensemble members if download_all_members/full_ensemble is False
+        if not full_ensemble:
+            ens_members = data_set[model]['ens_members']
         # loop through the variables
         for variable, table in input['variables'].items():
             # loop through the ensemble
@@ -74,6 +83,8 @@ for experiment, info in input['experiments'].items():
                 qry = "table_id == '" + table +"' & variable_id == '" + variable + "' & experiment_id == '" + experiment + "' & source_id == '" + src + "' & member_id == '" + variant + "'"
                 meta_data_sel = meta_data.query(qry)
                 if not meta_data_sel.empty:
+                    print("Trying to download: ")
+                    print(qry)
                     # print(meta_data_sel)
                     zstore = meta_data_sel.zstore.values[-1]
                     # create a mutable-mapping-style interface to the store
@@ -81,7 +92,6 @@ for experiment, info in input['experiments'].items():
                     # open it using xarray and zarr
                     ds = xr.open_zarr(mapper, consolidated=True)
                     ds_sel_time = ds.sel(time=slice(str(start_year), str(end_year)))
-
 
                     file_name_nc = '{var}_{exp}_{tab}_{sroc}_{vrnt}_{syr}_{eyr}.nc'.format(var=variable, exp=experiment, tab=table, sroc=src, vrnt=variant, syr=str(start_year), eyr=end_year)
                     out_file = os.path.join(out_dir, file_name_nc)
@@ -107,7 +117,7 @@ for experiment, info in input['experiments'].items():
                     ds_sel_time.close()
                     ds.close()
                 else:
-                    print('Data not found for:')
+                    print(f'Data not found for: {variable}')
                     print(qry)
                 print ('---------------------------------------')
             
