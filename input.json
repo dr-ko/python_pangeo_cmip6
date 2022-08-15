@@ -3,16 +3,21 @@
     "out_dir": "./cmip6_202207",
     "experiments": {
         "ssp585": [
-            2070,
+            2015,
             2100
+        ],
+        "historical": [
+            1850,
+            2014
         ]
+
     },
     "variables": {
-        "hfls": "Amon",
-        "lai": "Lmon",
-        "mrso": "Lmon"
+        "tas": "Amon",
+        "rsds": "Amon",
+        "pr": "Amon"
     },
-    "target_grid": [0.5, 0.5],
+    "target_grid": [],
     "regrid_method": "nearest_s2d",
     "download_all_models": false,
     "download_all_members": true,
