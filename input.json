@@ -1,21 +1,54 @@
 {
-    "metadata_csv": "",
-    "out_dir": "./cmip6_202207",
+    "metadata_csv": "./meta_data/cmip6-zarr-consolidated-stores.csv",
+    "out_dir": "./cmip6_202606",
+    "overwrite_data": false,
     "experiments": {
         "ssp585": [
-            2070,
+            2015,
             2100
+        ],
+        "historical": [
+            1980,2015
         ]
+
+    },
+    "variablese": {
+        "treeFrac": "Eyr",
+        "grassFrac": "Eyr",
+        "shrubFrac": "Eyr",
+        "residualFrac": "Eyr"
+
+    },
+    "variables2": {
+        "treeFrac": "Eyr",
+        "grassFrac": "Eyr",
+        "shrubFrac": "Eyr",
+        "residualFrac": "Eyr",
+        "cropFrac": "Eyr",
+        "vegFrac": "Eyr"
+    },
+    "variables_emon": {
+        "cropFracC3": "Emon",
+        "cropFracC4": "Emon",
+        "cropFrac": "Emon",
+        "vegFrac": "Emon"
     },
     "variables": {
-        "hfls": "Amon",
+        "tasmax": "Amon",
+        "tas": "Amon",
+        "hfls": "Amon" ,
+        "rlds": "Amon",
+        "rlus": "Amon", 
+        "rsds": "Amon", 
+        "rsus": "Amon",
         "lai": "Lmon",
         "mrso": "Lmon"
     },
-    "target_grid": [0.5, 0.5],
+    "target_grid": [2.0, 2.0],
     "regrid_method": "nearest_s2d",
     "download_all_models": false,
-    "download_all_members": true,
+    "download_all_members": false,
+    "min_count_member": 5000,
     "dataset": {
         "access": {
             "source_id": "ACCESS-ESM1-5",
