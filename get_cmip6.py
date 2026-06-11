@@ -88,7 +88,7 @@ for experiment, info in input['experiments'].items():
                     # print(meta_data_sel)
                     zstore = meta_data_sel.zstore.values[-1]
                     # create a mutable-mapping-style interface to the store
-                    mapper = fsspec.get_mapper(zstore)
+                    mapper = fsspec.get_mapper(zstore, token='anon')
                     # open it using xarray and zarr
                     ds = xr.open_zarr(mapper, consolidated=True)
                     ds_sel_time = ds.sel(time=slice(str(start_year), str(end_year)))
